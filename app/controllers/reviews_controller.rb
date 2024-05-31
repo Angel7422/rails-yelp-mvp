@@ -12,10 +12,11 @@ class ReviewsController < ApplicationController
     # associer la review avec le restaurant
     @review.restaurant = @restaurant
     # save le restaurant
-    if @review.save #si cela ne passe pas, ca renvoie false
+    if @review.save # si cela ne passe pas, ca renvoie false
       redirect_to restaurant_path(@restaurant)
     else
-      render :new, status: :unprocessable_entity
+      render "restaurants/show", status: :unprocessable_entity
+      # redirect_to restaurant_path(@restaurant)
     end
   end
 
@@ -25,8 +26,8 @@ class ReviewsController < ApplicationController
     @review.destroy
     # GET
     redirect_to restaurant_path(@review.restaurant), status: :see_other
-
   end
+
   private
 
   def review_params
